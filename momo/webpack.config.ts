@@ -75,12 +75,12 @@ const config: webpack.Configuration = {
     // 싱글페이지에서는 url이 없다. history가 있으면
     port: 3090,
     publicPath: '/dist/',
-//     proxy: {
-//       '/api/': {
-//         target: 'http://localhost:3095',
-//         changeOrigin: true,
-//       },
-//     },
+    // proxy: {
+    //   '/api/': {
+    //     target: 'http://localhost:3095',
+    //     changeOrigin: true,
+    //   },
+    // },
   },
 };
 
