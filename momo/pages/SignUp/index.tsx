@@ -7,7 +7,7 @@ import useSWR from 'swr';
 import fetcher from '@utils/fetcher';
 
 const SignUp = () => {
-  const { data, error, revalidate } = useSWR('http://localhost:3095/api/users', fetcher); // 혹시나 로그인한 상태에서 회원가입 페이지에 정보(접속) 들어가면 메인페이지로 되돌려줘야한다.
+  const { data, error } = useSWR('http://localhost:3095/api/users', fetcher); // 혹시나 로그인한 상태에서 회원가입 페이지에 정보(접속) 들어가면 메인페이지로 되돌려줘야한다.
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
   const [password, , setPassword] = useInput('');
@@ -70,7 +70,7 @@ const SignUp = () => {
   if (data) {
     // 혹여나 return같은 거는 반드시 hooks 보다 아래에 있어야 한다.
     // 혹시나 로그인한 상태에서 회원가입 페이지에 정보(접속) 들어가면 메인페이지로 되돌려줘야한다. ()
-    return <Redirect to="/workspace/channel" />;
+    return <Redirect to="/workspace/sleact/channel/일반" />;
   }
 
   return (

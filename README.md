@@ -62,7 +62,7 @@
 -   Network-Headers 공부하기
 -   Network 탭에 보면 POST랑 OPTIONS 파일이 생성된다. OPTIONS는 백엔드 서버와(3095) 프론트 서버(3090)가 서로 포트가다르면 요청을 한 번씩 더 보낸다(OPTIONS)
 -   원래 서로 주소가 다르면 요청이 안된다.
--   백엔드에서 어떤 설정을 했기때문에 정상적으로 POST가 됬지만, 설정을 풀면 CORS에러가 발생한다. (Acces to XMLHttpReques at 'http://localhost~~~'from orign 'http://localhost~~'has been blockled bgy CORS policy:~~)
+-   백엔드에서 어떤 설정을 했기때문에 정상적으로 처리가 됬지만, 설정을 풀면 CORS에러가 발생한다.
 -   해결방법은 두 가지가 있다.
 -   백엔드 개발자한테 에러 메시지 보여줘서 해결하기.
 -   프론트엔드 개발자가 스스로 webpack-devserver에서 proxy 설정하기 (이때 같은 도메인으로 적용된거라서 `OPTIONS` 파일은 없어진다.)
@@ -129,6 +129,8 @@ revaildate 단점은 요청을 한 번 더 보내는 것이다. (로그인 후�
 
 -   [React 공식문서](https://reactjs.org/docs/composition-vs-inheritance.html#containment)
 
+### 리액트에서 컴포넌트 나눌때 Input이 들어가면 한 글자 입력할 때마다 전체가 리렌더링 발생해서 따로 분리하는게 좋다.
+
 ### npm
 
 ```
@@ -155,5 +157,6 @@ npm i npm i --save-dev @types/loadable\_\_component
 npm i @emotion/react @emotion/styled // emotion css in js
 npm i axios
 npm i swr
-
+npm i garvatar @types/gravatar
+npm i react-toastify // 에러 발생시 토스트기계처럼 나타났다가 사라지는 라이브러리
 ```
