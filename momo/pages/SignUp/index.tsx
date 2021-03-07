@@ -117,8 +117,8 @@ const SignUp = () => {
         이미 회원이신가요?&nbsp;
         <Link to="/login" href="/login">
           로그인 하러가기
-        </Link>{' '}
-        // a로하면 새로고침되고 Link는 유지하면서 새로고침없이 변경된다.
+        </Link>
+        {/* a로하면 새로고침되고 Link는 유지하면서 새로고침없이 변경된다. */}
       </LinkContainer>
     </div>
   );
