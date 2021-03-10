@@ -7,7 +7,7 @@ import { Link, Redirect } from 'react-router-dom';
 import useSWR from 'swr';
 
 const LogIn = () => {
-  const { data, error, revalidate, mutate } = useSWR('http://localhost:3095/api/users', fetcher, {
+  const { data, error, revalidate, mutate } = useSWR('/api/users', fetcher, {
     //dedupingInterval: 100000,
   }); // 첫번째는 주소를 받고, 두번 째는 함수를 받는다(주소를 어떻게 처리할지).
   // swr자체는 아무 역할을 하지 않는다.
@@ -19,10 +19,10 @@ const LogIn = () => {
       e.preventDefault();
       setLogInError(false);
       axios
-        .post('http://localhost:3095/api/users/login', { email, password }, { withCredentials: true })
+        .post('/api/users/login', { email, password }, { withCredentials: true })
         .then((response) => {
-          mutate(response.data, false); // revalidate를 하면 서버의 요청을 보내서 자기 정보를 다시 가져오는거고 mutate를 하면 response.data 기존의 이미 가지고 있던 정보를 { data }에다 넣어버린다. 그러면 요청을 안보내도 된다. (두번 째 인자에 false해줘야 요청이 안된다.)
-          // revalidate();
+          // mutate(response.data, false); // revalidate를 하면 서버의 요청을 보내서 자기 정보를 다시 가져오는거고 mutate를 하면 response.data 기존의 이미 가지고 있던 정보를 { data }에다 넣어버린다. 그러면 요청을 안보내도 된다. (두번 째 인자에 false해줘야 요청이 안된다.)
+          revalidate();
         })
         .catch((error) => {
           setLogInError(error.response?.data?.statusCode === 401);

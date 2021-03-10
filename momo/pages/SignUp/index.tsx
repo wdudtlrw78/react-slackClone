@@ -7,7 +7,7 @@ import useSWR from 'swr';
 import fetcher from '@utils/fetcher';
 
 const SignUp = () => {
-  const { data, error } = useSWR('http://localhost:3095/api/users', fetcher); // 혹시나 로그인한 상태에서 회원가입 페이지에 정보(접속) 들어가면 메인페이지로 되돌려줘야한다.
+  const { data, error } = useSWR('/api/users', fetcher); // 혹시나 로그인한 상태에서 회원가입 페이지에 정보(접속) 들어가면 메인페이지로 되돌려줘야한다.
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
   const [password, , setPassword] = useInput('');
@@ -42,7 +42,7 @@ const SignUp = () => {
         setSignUpError(''); // 로딩 단계 - state 비동기(요청)에 관련해서 state변경해주는게 있으면 요청 보내기 직전에 초기화 해주기
         setSignUpSuccess(false);
         axios
-          .post('http://localhost:3095/api/users', {
+          .post('/api/users', {
             email,
             nickname,
             password,
@@ -106,11 +106,11 @@ const SignUp = () => {
               onChange={onChangepasswordCheck}
             />
           </div>
-          {mismatchError && <Error>비밀번호가 일치하지 않습니다!</Error>}
-          {!nickname && <Error>닉네임을 입력해주세요.</Error>}
-          {signUpError && <Error>{signUpError}</Error>} {/*이미 사용중인 아이디입니다. -> {signUpError} */}
-          {singUpSuccess && <Success>회원가입되었습니다! 로그인해주세요.</Success>}
         </Label>
+        {mismatchError && <Error>비밀번호가 일치하지 않습니다!</Error>}
+        {!nickname && <Error>닉네임을 입력해주세요.</Error>}
+        {signUpError && <Error>{signUpError}</Error>} {/*이미 사용중인 아이디입니다. -> {signUpError} */}
+        {singUpSuccess && <Success>회원가입되었습니다! 로그인해주세요.</Success>}
         <Button type="submit">회원가입</Button>
       </Form>
       <LinkContainer>

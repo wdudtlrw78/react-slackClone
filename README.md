@@ -131,6 +131,10 @@ revaildate 단점은 요청을 한 번 더 보내는 것이다. (로그인 후�
 
 ### 리액트에서 컴포넌트 나눌때 Input이 들어가면 한 글자 입력할 때마다 전체가 리렌더링 발생해서 따로 분리하는게 좋다.
 
+### 보통 미리 실제 컴포넌트를 구현하기 전에 변수이름 먼저 선언(배치)부터하고 나중에 구현한다. 큰 틀에서 부터 어떤 컴포넌트가 어디에 위치해야 할지 정하면 좋다.
+
+C
+
 ### npm
 
 ```
@@ -159,4 +163,10 @@ npm i axios
 npm i swr
 npm i garvatar @types/gravatar
 npm i react-toastify // 에러 발생시 토스트기계처럼 나타났다가 사라지는 라이브러리
+npm i autosize --save-dev @types/autosize
+npm i socket.io-client@2 --save-dev @types/socket.io-client
+npm i react-custom-scrollbars --save --save-dev @types/react-custom-scrollbars
+npm install dayjs --save
+npm i react-mentions --save-dev @types/react-mentions
+npm i regexify-string
 ```

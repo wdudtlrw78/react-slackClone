@@ -29,10 +29,11 @@ const config: webpack.Configuration = {
       {
         test: /\.tsx?$/,
         loader: 'babel-loader', // tsx를 JS로 변경
-        options: { // 의 옵션
+        options: {
+          // 의 옵션
           presets: [
             [
-              '@babel/preset-env', 
+              '@babel/preset-env',
               {
                 targets: { browsers: ['last 2 chrome versions'] },
                 debug: isDevelopment,
@@ -42,9 +43,9 @@ const config: webpack.Configuration = {
             '@babel/preset-typescript',
           ],
           env: {
-              development: {
-                  plugins: [require.resolve('react-refresh/babel')],
-              },
+            development: {
+              plugins: [require.resolve('react-refresh/babel')],
+            },
           },
         },
         exclude: path.join(__dirname, 'node_modules'),
@@ -56,7 +57,8 @@ const config: webpack.Configuration = {
     ],
   },
   plugins: [
-    new ForkTsCheckerWebpackPlugin({  // typeSciprt 사용하실거면 설치해서 넣는다.
+    new ForkTsCheckerWebpackPlugin({
+      // typeSciprt 사용하실거면 설치해서 넣는다.
       async: false,
       // eslint: {
       //   files: "./src/**/*",
@@ -75,19 +77,19 @@ const config: webpack.Configuration = {
     // 싱글페이지에서는 url이 없다. history가 있으면
     port: 3090,
     publicPath: '/dist/',
-    // proxy: {
-    //   '/api/': {
-    //     target: 'http://localhost:3095',
-    //     changeOrigin: true,
-    //   },
-    // },
+    proxy: {
+      '/api/': {
+        target: 'http://localhost:3095',
+        changeOrigin: true,
+      },
+    },
   },
 };
 
 if (isDevelopment && config.plugins) {
   config.plugins.push(new webpack.HotModuleReplacementPlugin());
   config.plugins.push(new ReactRefreshWebpackPlugin());
-//   config.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'server', openAnalyzer: false }));
+  //   config.plugins.push(new BundleAnalyzerPlugin({ analyzerMode: 'server', openAnalyzer: false }));
 }
 if (!isDevelopment && config.plugins) {
   // config.plugins.push(new webpack.LoaderOptionsPlugin({ minimize: true }));
