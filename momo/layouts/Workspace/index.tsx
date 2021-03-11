@@ -63,7 +63,7 @@ const Workspace: VFC = () => {
   useEffect(() => {
     if (channelData && userData && socket) {
       console.log(socket);
-      socket.emit('login', { id: userData.id, Channels: channelData.map((v) => v.id) });
+      socket.emit('login', { id: userData.id, channels: channelData.map((v) => v.id) });
     }
   }, [socket, channelData, userData]);
 
@@ -95,12 +95,8 @@ const Workspace: VFC = () => {
     setShowUserMenu((prev) => !prev);
   }, []);
 
-  const onCLickCreateWorkspace = useCallback(() => {
+  const onClickCreateWorkspace = useCallback(() => {
     setShowCreateWorkspaceModal(true);
-  }, []);
-
-  const toggleWorkspaceModal = useCallback(() => {
-    setShowWorkspaceModal((prev) => !prev);
   }, []);
 
   const onCreateWorkspace = useCallback(
@@ -140,6 +136,10 @@ const Workspace: VFC = () => {
     setShowInviteChannelModal(false);
   }, []);
 
+  const toggleWorkspaceModal = useCallback(() => {
+    setShowWorkspaceModal((prev) => !prev);
+  }, []);
+
   const onClickAddChannel = useCallback(() => {
     setShowCreateChannelModal(true);
   }, []);
@@ -158,7 +158,7 @@ const Workspace: VFC = () => {
       <Header>
         <RightMenu>
           <span onClick={onClickUserProfile}>
-            <ProfileImg src={gravatar.url(userData.nickname, { s: '28px', d: 'retro' })} alt={userData.nickname} />
+            <ProfileImg src={gravatar.url(userData.email, { s: '28px', d: 'retro' })} alt={userData.nickname} />
             {showUserMenu && (
               <Menu style={{ right: 0, top: 38 }} show={showUserMenu} onCloseModal={onCloseUserProfile}>
                 <ProfileModal>
@@ -185,7 +185,7 @@ const Workspace: VFC = () => {
               </Link>
             );
           })}
-          <AddButton onClick={onCLickCreateWorkspace}></AddButton>
+          <AddButton onClick={onClickCreateWorkspace}></AddButton>
         </Workspaces>
         <Channels>
           <WorkspaceName onClick={toggleWorkspaceModal}>Sleact</WorkspaceName>

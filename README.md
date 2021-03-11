@@ -162,11 +162,12 @@ npm i @emotion/react @emotion/styled // emotion css in js
 npm i axios
 npm i swr
 npm i garvatar @types/gravatar
-npm i react-toastify // 에러 발생시 토스트기계처럼 나타났다가 사라지는 라이브러리
+npm i react-toastify
 npm i autosize --save-dev @types/autosize
 npm i socket.io-client@2 --save-dev @types/socket.io-client
 npm i react-custom-scrollbars --save --save-dev @types/react-custom-scrollbars
 npm install dayjs --save
 npm i react-mentions --save-dev @types/react-mentions
 npm i regexify-string
+npm i webpack-bundle-analyzer --save-dev @types/webpack-bundle-analyzer
 ```

@@ -1,18 +1,18 @@
-import { IChannel, IDM, IUser, IUserWithOnline } from '@typings/db';
+// import useSocket from '@hooks/useSocket';
+import useSocket from '@hooks/useSocket';
+import { IDM, IUser, IUserWithOnline } from '@typings/db';
 import { CollapseButton } from '@components/DMList/styles';
 import fetcher from '@utils/fetcher';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import useSWR from 'swr';
-import useSocket from '@hooks/useSocket';
 
 const DMList: FC = () => {
   const { workspace } = useParams<{ workspace?: string }>();
   const { data: userData, error, revalidate, mutate } = useSWR<IUser>('/api/users', fetcher, {
     dedupingInterval: 2000, // 2초
   });
-  const { data: channelData } = useSWR<IChannel[]>(userData ? `/api/workspaces/${workspace}/channels` : null, fetcher);
   const { data: memberData } = useSWR<IUserWithOnline[]>(
     userData ? `/api/workspaces/${workspace}/members` : null,
     fetcher,
@@ -91,7 +91,6 @@ const DMList: FC = () => {
                 to={`/workspace/${workspace}/dm/${member.id}`}
                 onClick={resetCount(member.id)}
               >
-                {/*NavLink = Linke랑 동일하지만 한 가지 차이점은 현재 주소랑 to 의 주소 위치가 같으면 activeCLassName이 적용된다.(selected, 하이라이트 기능) */}
                 <i
                   className={`c-icon p-channel_sidebar__presence_icon p-channel_sidebar__presence_icon--dim_enabled c-presence ${
                     isOnline ? 'c-presence--active c-icon--presence-online' : 'c-icon--presence-offline'
