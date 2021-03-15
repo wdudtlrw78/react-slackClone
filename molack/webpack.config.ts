@@ -69,7 +69,7 @@ const config: webpack.Configuration = {
     publicPath: '/dist/',
   },
   devServer: {
-    historyApiFallback: false, // react router 필요 false상태일 때 페이지 새로고침 하면 인식이 안된다.
+    historyApiFallback: true, // react router 필요 false상태일 때 페이지 새로고침 하면 인식이 안된다.
     // 싱글페이지에서는 url이 없다. history가 있으면
     port: 3090,
     publicPath: '/dist/',
