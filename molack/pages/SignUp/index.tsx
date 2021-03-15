@@ -1,17 +1,21 @@
 import useInput from '@hooks/useInput';
+import fetcher from '@utils/fetcher';
 import axios from 'axios';
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import useSWR from 'swr';
 import { Header, Form, Label, Input, Button, LinkContainer, Error, Success } from './styles';
 
 const SignUp = () => {
+  const url = 'http://localhost:3095';
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeNickname] = useInput('');
-  const [password, setPassword] = useInput('');
-  const [passwordCheck, setPasswordCheck] = useInput('');
+  const [password, setPassword] = useState('');
+  const [passwordCheck, setPasswordCheck] = useState('');
   const [mismatchError, setMismatchError] = useState(false);
   const [signUpError, setSignUpError] = useState('');
   const [singUpSuccess, setSignUpSuccess] = useState(false);
+  const { data, error, revalidate, mutate } = useSWR(`${url}/api/users`, fetcher);
 
   const onChangePassword = useCallback(
     (e) => {
@@ -32,9 +36,8 @@ const SignUp = () => {
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      console.log(email, nickname, password, passwordCheck);
       if (!mismatchError && nickname) {
-        console.log('서버 회원가입하기');
+        console.log('서버로 회원가입하기');
         setSignUpError('');
         setSignUpSuccess(false);
         axios
@@ -44,18 +47,26 @@ const SignUp = () => {
             password,
           })
           .then((response) => {
-            setSignUpSuccess(true);
             console.log(response);
+            setSignUpSuccess(true);
           })
           .catch((error) => {
-            setSignUpError(error.response.data);
             console.log(error.response);
+            setSignUpError(error.response.data);
           })
           .finally(() => {});
       }
     },
     [email, nickname, password, passwordCheck, mismatchError],
   );
+
+  if (data === null) {
+    return <div>로당중...</div>;
+  }
+
+  if (data) {
+    return <Redirect to="/workspace/channel/" />;
+  }
   return (
     <div id="container">
       <Header>Molack</Header>
